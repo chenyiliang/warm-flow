@@ -1,5 +1,6 @@
 packages:
   - 'warm-flow-vue-designer'
+  - 'warm-flow-react-designer'
   - 'warm-flow-designer-demo/*'
 
 allowBuilds:
@@ -7,6 +8,7 @@ allowBuilds:
   core-js: set this to true or false
   core-js-pure: set this to true or false
   esbuild: set this to true or false
+  swiper: set this to true or false
   vue-demi: set this to true or false
 
 # 放行必要的依赖构建脚本（pnpm 默认拦截）；esbuild 为 vite 构建所必需
