@@ -1,0 +1,40 @@
+/* 分页器页码按钮 - 暗黑模式 */
+html.dark .next-pagination.next-small .next-pagination-list li,
+html.dark .next-pagination-list li.number {
+  background: #1a1a1a !important;
+  color: #c0c4cc !important;
+  border: 1px solid #414243;
+  min-width: 28px;
+  line-height: 24px;
+}
+html.dark .next-pagination.next-small .next-pagination-list li.is-active,
+html.dark .next-pagination-list li.is-active {
+  background: var(--wf-primary) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+html.dark .next-pagination.next-small .next-pagination-list li:hover,
+html.dark .next-pagination-list li.number:hover:not(.is-active) {
+  color: var(--wf-primary) !important;
+  background: rgba(64,158,255,.08) !important;
+}
+
+/* el-tree 树节点区域 - 暗黑模式 */
+html.dark .next-tree { background-color: transparent !important; }
+html.dark .next-tree-node-label { color: #c0c4cc !important; }
+html.dark .next-tree-node-label:hover,
+html.dark .next-tree-node.is-current > .next-tree-node-label {
+  background-color: rgba(64,158,255,.12) !important;
+}
+
+/* 分页器前后按钮 - 暗黑模式 */
+html.dark .next-pagination .btn-prev,
+html.dark .next-pagination .btn-next {
+  background-color: transparent !important;
+  border-color: #414243 !important;
+  color: #c0c4cc !important;
+}
+html.dark .next-pagination .btn-prev:hover,
+html.dark .next-pagination .btn-next:hover {
+  color: var(--wf-primary) !important;
+}

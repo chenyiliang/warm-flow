@@ -1,0 +1,33 @@
+/* ============================================================
+ * 属性面板 / 办理人选择器样式汇总入口（React 版）。
+ *
+ * 这些样式对应从 Vue 版移植的 10 个组件 SCSS，已由 scss 转换脚本处理为：
+ *  - Element Plus 类名(.el-*) -> Fusion 类名(.next-*)
+ *  - 剥离 Vue scoped 语法(:deep / ::v-deep / :global)
+ *  - 各文件规则套上命名空间根类（避免裸 import 泄漏到宿主全局）
+ *  - @import 提到顶层（Sass 要求）
+ *
+ * designer.scss（已在库入口 import）引入本文件，使全部面板样式随库产物一起打包。
+ * 顺序无强依赖（各文件自带命名空间），但 propertySetting / selectUser 的 global 文件
+ * 放在最后，让其 portal 根类（.property-drawer-modern / .person-select-dialog）覆盖生效。
+ * ============================================================ */
+
+/* 节点属性面板（抽屉内） */
+@import './propertySetting.scoped.scss';
+@import './baseInfo.scoped.scss';
+@import './between.scoped.scss';
+@import './start.scoped.scss';
+@import './end.scoped.scss';
+@import './gateway.scoped.scss';
+@import './skip.scoped.scss';
+@import './nodeExtList.scoped.scss';
+
+/* 办理人选择器（弹窗内） */
+@import './userPickerTree.scoped.scss';
+@import './userPickerSearch.scoped.scss';
+@import './userPickerSelectedBar.scoped.scss';
+@import './selectUser.scoped.scss';
+
+/* portal 到 body 的全局样式（抽屉 / 弹窗，锚定各自根类） */
+@import './propertySetting.global.scss';
+@import './selectUser.global.scss';

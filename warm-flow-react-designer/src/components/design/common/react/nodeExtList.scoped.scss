@@ -1,0 +1,376 @@
+/* 命名空间：本文件全部规则收敛在 .nodeExtForm 下，避免污染宿主应用全局样式
+   （Vue 版是 <style scoped>，React 无 scoped，裸 import 会让 .mt5 / .placeholder 这类通用名泄漏到宿主）。
+   三处改写保证包裹后语义不变：
+   1) @import 提到块外（Sass 要求 @import 位于文档顶层）；
+   2) 顶层 .nodeExtForm 自身规则 -> &（否则变成 .nodeExtForm .nodeExtForm，匹配不到根元素）；
+   3) html.dark 祖先选择器 -> html.dark &（否则变成 .nodeExtForm html.dark，祖先关系倒置而失效）。 */
+.nodeExtForm {
+/* ========== 1. 表单整体 ========== */
+& {
+  padding: 8px 16px;
+  html.dark & { background: var(--wf-bg-color); border-radius: var(--wf-radius-lg); }
+}
+
+/* ========== 2. 表单项通用样式（与其它 Tab 统一：紧凑、无分隔线，EP/antd 一致） ========== */
+& .next-form-item,
+
+& .next-form-item-label {
+  font-weight: 600;
+  color: var(--wf-text-primary);
+  letter-spacing: 0.3px;
+  padding-right: 8px;
+  /* 固定宽度，统一对齐，长标签不换行 */
+  width: 132px !important;
+  min-width: 132px !important;
+  max-width: 132px !important;
+  white-space: nowrap;
+}
+
+/* ========== 3. 输入框 / 文本域 (type 1, 2) ========== */
+& .next-input,
+& .next-input-textarea textarea {
+  border-radius: var(--wf-radius);
+  transition: all 0.3s ease;
+}
+
+/* 禁用态暗黑模式覆盖 — html.dark 必须作为外层 */
+html.dark & .nodeExtForm .next-input.next-disabled,
+html.dark & .nodeExtForm .next-input-textarea textarea.next-disabled {
+  background-color: #2a2d35 !important;
+  box-shadow: none !important;
+  border-color: #3a3e48 !important;
+}
+
+& .next-input:hover,
+& .next-input-textarea textarea:hover {
+  box-shadow: 0 0 0 1px var(--wf-primary) inset;
+}
+
+& .next-input.next-focus .next-input,
+& .next-input-textarea textarea:focus {
+  box-shadow: 0 0 0 1px var(--wf-primary) inset, 0 0 0 3px rgba(64, 158, 255, 0.1);
+}
+
+& .next-input-textarea textarea {
+  min-height: 80px !important;
+}
+
+/* ========== 4. 下拉选择框 (type 3) ========== */
+& .next-select {
+  width: 100% !important;
+}
+
+& .next-select .next-select-tag .next-tag {
+  border-radius: var(--wf-radius-round);
+  background: var(--wf-primary-light);
+  border-color: transparent;
+  color: var(--wf-primary);
+}
+
+/* ========== 5. Radio/Checkbox 卡片化 (type 4) ========== */
+& .next-radio-group,
+& .next-checkbox-group {
+  width: 100%;
+}
+
+& .next-radio-group .next-row,
+& .next-checkbox-group .next-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+& .next-radio-group .next-col,
+& .next-checkbox-group .next-col {
+  flex: 0 0 auto;
+  min-width: 120px;
+  max-width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Radio 卡片 */
+& .next-radio {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--wf-border-color);
+  border-radius: var(--wf-radius);
+  padding: 8px 16px;
+  margin-right: 0;
+  background: var(--wf-bg-white);
+  transition: all 0.3s ease;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: var(--wf-primary);
+    box-shadow: var(--wf-shadow-sm);
+  }
+
+  &.is-checked {
+    border-color: var(--wf-primary);
+    background: var(--wf-primary-light);
+    box-shadow: var(--wf-shadow-primary);
+
+    .next-radio-label {
+      color: var(--wf-primary);
+    }
+  }
+}
+
+/* Checkbox 卡片 */
+& .next-checkbox {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--wf-border-color);
+  border-radius: var(--wf-radius);
+  padding: 8px 16px;
+  margin-right: 0;
+  background: var(--wf-bg-white);
+  transition: all 0.3s ease;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: var(--wf-primary);
+    box-shadow: var(--wf-shadow-sm);
+  }
+
+  &.is-checked {
+    border-color: var(--wf-primary);
+    background: var(--wf-primary-light);
+    box-shadow: var(--wf-shadow-primary);
+
+    .next-checkbox-label {
+      color: var(--wf-primary);
+    }
+  }
+}
+
+
+
+
+
+/* ========== 6. 人员选择器 (type 5) ========== */
+& .next-tag {
+  border-radius: var(--wf-radius-round);
+  background: var(--wf-primary-light);
+  color: var(--wf-primary);
+  border: none;
+  padding: 4px 12px;
+  margin-right: 8px !important;
+  margin-bottom: 8px !important;
+  box-shadow: 0 1px 3px rgba(64, 158, 255, 0.15);
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  .next-tag-body {
+    color: var(--wf-primary);
+  }
+
+  .next-tag-close-btn,
+  .next-icon.next-tag-close-btn {
+    border-radius: 50%;
+    background: rgba(64, 158, 255, 0.15);
+    color: var(--wf-primary);
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: #f56c6c;
+      color: #fff;
+    }
+  }
+}
+
+/* 选择按钮 */
+& .next-btn-primary {
+  border-radius: var(--wf-radius);
+  background: linear-gradient(135deg, var(--wf-primary), var(--wf-primary-dark));
+  border: none;
+  box-shadow: var(--wf-shadow-sm);
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--wf-shadow-primary);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* ========== 7. 数字输入框 (type 6) ========== */
+& .next-number-picker {
+  width: 100% !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+& .next-number-picker .next-number-picker-handler,
+& .next-number-picker .next-number-picker-handler {
+  border-radius: var(--wf-radius-sm);
+}
+
+/* ========== 8. 日期/时间选择器 (type 7) ========== */
+& .next-date-picker,
+& .next-time-picker {
+  width: 100%;
+}
+
+& .next-date-picker .next-input {
+  border-radius: var(--wf-radius);
+}
+
+& .next-date-picker .next-input-label .next-icon,
+& .next-time-picker .next-input-label .next-icon {
+  color: var(--wf-primary);
+}
+
+/* ========== 9. Tooltip 图标 ========== */
+& .next-form-item-label .next-icon {
+  color: var(--wf-text-secondary);
+  cursor: help;
+  transition: color 0.25s ease;
+  vertical-align: middle;
+
+  &:hover {
+    color: var(--wf-primary);
+  }
+}
+
+/* ========== 10. 暗黑模式（统一使用 ::global 兜底） ========== */
+/* 注意：冗余的 html.dark 嵌套已清理，下方 html.dark 规则可覆盖所有场景 */
+html.dark & .next-input,
+html.dark & .next-input-textarea textarea {
+  background: var(--wf-bg-white);
+}
+
+html.dark & .next-radio,
+html.dark & .next-checkbox {
+  background: var(--wf-bg-white);
+  border-color: var(--wf-border-color);
+
+  &.is-checked {
+    background: var(--wf-primary-light);
+    border-color: var(--wf-primary);
+    box-shadow: 0 0 8px rgba(64, 158, 255, 0.25);
+  }
+}
+
+html.dark & .next-tag {
+  background: var(--wf-primary-light);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+html.dark & .next-select .next-select-tag .next-tag {
+  background: var(--wf-primary-light);
+}
+
+/* el-input-number 加减按钮暗黑适配 */
+html.dark & .next-number-picker-handler,
+html.dark & .next-number-picker-handler {
+  background-color: var(--wf-bg-white);
+  color: var(--wf-text-primary);
+  border-left-color: var(--wf-border-color);
+}
+
+html.dark & .next-number-picker-handler:hover,
+html.dark & .next-number-picker-handler:hover {
+  background-color: var(--wf-primary-light);
+  color: var(--wf-primary);
+}
+
+html.dark & .next-number-picker-handler.next-disabled,
+html.dark & .next-number-picker-handler.next-disabled {
+  background-color: var(--wf-bg-white);
+  color: var(--wf-text-placeholder);
+}
+
+/* ========== 11. 用户选择对话框 ========== */
+.next-dialog-header {
+  background: linear-gradient(135deg, var(--wf-primary-light), var(--wf-primary-lighter));
+  border-bottom: 1px solid var(--wf-border-lighter);
+  padding: 16px 20px;
+  border-radius: var(--wf-radius-lg) var(--wf-radius-lg) 0 0;
+}
+
+.next-dialog-header {
+  font-weight: 600;
+  color: var(--wf-primary);
+  letter-spacing: 0.5px;
+}
+
+.next-dialog-body {
+  padding: 16px 20px;
+}
+
+html.dark & .next-dialog-header {
+  background: linear-gradient(135deg, var(--wf-primary-light), #1a2744);
+}
+
+/* ========== 12. 手机端响应式适配 ========== */
+@media (max-width: 768px) {
+  .nodeExtForm {
+    padding: 6px 10px !important;
+  }
+
+  .nodeExtForm .next-form-item {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+  }
+
+  .nodeExtForm .next-form-item-label {
+    min-width: 100px !important;
+    max-width: 120px !important;
+    font-size: 12px !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+
+  /* 下拉/数字输入框100%宽度 */
+  .nodeExtForm .next-select,
+  .nodeExtForm .next-number-picker {
+    width: 100% !important;
+  }
+
+  /* radio/checkbox 卡片：手机端保持一行横向排列，紧凑间距 */
+  .nodeExtForm .next-radio-group .next-col,
+  .nodeExtForm .next-checkbox-group .next-col {
+    flex: 0 0 auto;
+    min-width: unset;
+    max-width: none;
+  }
+
+  /* tag 标签紧凑 */
+  .nodeExtForm .next-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  /* 对话框全屏 */
+  .nodeExtForm .next-dialog {
+    width: 95% !important;
+    margin: 10px auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nodeExtForm .next-form-item-label {
+    min-width: 90px !important;
+    font-size: 11px !important;
+    white-space: normal !important;
+  }
+  .nodeExtForm .next-radio,
+  .nodeExtForm .next-checkbox {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+}

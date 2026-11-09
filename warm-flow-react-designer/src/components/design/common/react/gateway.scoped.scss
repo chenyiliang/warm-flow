@@ -1,0 +1,25 @@
+@import '@/assets/styles/_common.scss';
+
+/* 命名空间：本文件全部规则收敛在 .gateway-wrapper 下，避免污染宿主应用全局样式
+   （Vue 版是 <style scoped>，React 无 scoped，裸 import 会让 .mt5 / .placeholder 这类通用名泄漏到宿主）。
+   三处改写保证包裹后语义不变：
+   1) @import 提到块外（Sass 要求 @import 位于文档顶层）；
+   2) 顶层 .gateway-wrapper 自身规则 -> &（否则变成 .gateway-wrapper .gateway-wrapper，匹配不到根元素）；
+   3) html.dark 祖先选择器 -> html.dark &（否则变成 .gateway-wrapper html.dark，祖先关系倒置而失效）。 */
+.gateway-wrapper {
+
+
+& { width: 100%; html.dark & { background: var(--wf-bg-color); border-radius: var(--wf-radius-lg); } }
+.gatewayForm { border-top: 0; width: 100%; }
+
+/* 引入公共样式：基础配置卡片 */
+@include base-settings-card;
+@include responsive-adaption;
+
+/* gateway 特有图标 */
+.ext-icon-base {
+  color: var(--wf-primary);
+  svg { width: 16px; height: 16px; }
+}
+
+}

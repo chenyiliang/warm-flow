@@ -1,0 +1,87 @@
+{
+  "name": "@dromara/warm-flow-designer-react",
+  "version": "0.1.0",
+  "description": "Warm-Flow 流程设计器 React 版（经典 + 仿钉钉双模式）组件库，移植自 @dromara/warm-flow-designer",
+  "author": "warm",
+  "license": "MIT",
+  "keywords": [
+    "warm-flow",
+    "workflow",
+    "flow-designer",
+    "logicflow",
+    "react",
+    "dromara"
+  ],
+  "homepage": "https://warm-flow.dromara.org",
+  "bugs": {
+    "url": "https://github.com/dromara/warm-flow/issues"
+  },
+  "type": "module",
+  "module": "./dist-lib/warm-flow-designer-react.es.js",
+  "types": "./dist-lib/designer/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/designer/index.d.ts",
+      "import": "./dist-lib/warm-flow-designer-react.es.js"
+    },
+    "./next": {
+      "types": "./dist-lib/ui/nextAdapter.d.ts",
+      "import": "./dist-lib/next.es.js"
+    },
+    "./style": "./dist-lib/warm-flow-designer-react.css",
+    "./style.css": "./dist-lib/warm-flow-designer-react.css"
+  },
+  "files": [
+    "dist-lib"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "./src/icons/index.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite build --config vite.lib.config.js --watch",
+    "build:lib": "vite build --config vite.lib.config.js && vite build --config vite.next.config.js",
+    "build:next": "vite build --config vite.next.config.js",
+    "port:scss": "node scripts/port-scss-from-vue.mjs",
+    "mock": "node mock/server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/dromara/warm-flow.git"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@alifd/next": "^1.27.34",
+    "@logicflow/core": "^2.1.11",
+    "@logicflow/extension": "^2.1.15",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@alifd/next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@alifd/next": "1.27.34",
+    "@iconify/react": "^5.0.1",
+    "@iconify/types": "^2.0.0",
+    "@iconify-json/ep": "^1.2.4",
+    "@logicflow/core": "^2.1.11",
+    "@logicflow/extension": "^2.1.15",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "4.3.4",
+    "axios": "0.27.2",
+    "file-saver": "2.0.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sass": "1.69.5",
+    "typescript": "^5.9.3",
+    "vite": "5.0.4",
+    "vite-plugin-dts": "^5.0.2"
+  }
+}

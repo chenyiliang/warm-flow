@@ -1,0 +1,41 @@
+@import '@/assets/styles/_common.scss';
+
+/* 命名空间：本文件全部规则收敛在 .skip-wrapper 下，避免污染宿主应用全局样式
+   （Vue 版是 <style scoped>，React 无 scoped，裸 import 会让 .mt5 / .placeholder 这类通用名泄漏到宿主）。
+   三处改写保证包裹后语义不变：
+   1) @import 提到块外（Sass 要求 @import 位于文档顶层）；
+   2) 顶层 .skip-wrapper 自身规则 -> &（否则变成 .skip-wrapper .skip-wrapper，匹配不到根元素）；
+   3) html.dark 祖先选择器 -> html.dark &（否则变成 .skip-wrapper html.dark，祖先关系倒置而失效）。 */
+.skip-wrapper {
+
+
+& { width: 100%; html.dark & { background: var(--wf-bg-color); border-radius: var(--wf-radius-lg); } }
+.skipForm { border-top: 0; width: 100%; }
+.placeholder { color: #828f9e; font-size: 12px; }
+
+/* 引入公共样式：基础配置卡片 */
+@include base-settings-card;
+@include responsive-adaption;
+
+/* skip 特有图标 */
+.ext-icon-skip {
+  color: var(--wf-text-regular); svg { width: 16px; height: 16px; }
+}
+
+/* skip 特有：手机端跳转条件区域输入框堆叠 */
+@media (max-width: 768px) {
+  .skip-wrapper .next-form-item {
+    .next-form-item-control {
+      flex-wrap: wrap;
+    }
+    /* 条件名 + 条件方式 + 值，手机端换行显示 */
+    .next-input,
+    .next-select {
+      width: 100% !important;
+      margin-left: 0 !important;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+}
